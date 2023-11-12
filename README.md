@@ -16,6 +16,7 @@ Jogo pong para 1 ou dois jogadores, com uma tela inicial para escolher a dificul
 12/11/2023
 ![video funcionamento](https://github.com/Jalmijao/Pong/blob/main/conteudo%2012-11-2023/Funcionamento%20jogo%201%20player.mp4)
 
+
 ![setup inicial](https://github.com/Jalmijao/Pong/blob/main/conteudo%2012-11-2023/Setup%20inicial.png)
 
 Jogo funcionando para único player, salvando a quantidade de pontos sofrida pelo jogador e apresentando essa informação na tela a cada ponto.
