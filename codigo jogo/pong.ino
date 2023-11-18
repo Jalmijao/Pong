@@ -7,20 +7,16 @@
 #define CLOCK_PIN 13
 
 UltraSonicDistanceSensor distanceSensor(10, 9);  // Initialize sensor that uses digital pins 13 and 12.
-int ledAcender = 0;
+
 int matriz[8][8];
-int posicaoY = 3;
-int posicaoX = 3;
+int bolinhaY = 3;
+int bolinhaX = 3;
 int adicaoY = 0;
 int adicaoX = 1;
 int posicaoRaquete = 3;
-int distanciaAnterior = 0;
-int contadorAndar = 0;
-int delayInicial = 250;
+int delayJogo = 250;
 int pontos = 0;
-int um = 0;
-int dois = 0;
-int zero = 0;
+
 
 // Define the array of leds
 CRGB leds[NUM_LEDS];
@@ -31,8 +27,13 @@ void setup() {
   FastLED.addLeds<WS2812B, DATA_PIN, RGB>(leds, NUM_LEDS);  // GRB ordering is typical
   leds[matriz[0][posicaoRaquete]] = CRGB::Blue;
   leds[matriz[0][posicaoRaquete - 1]] = CRGB::Blue;
-
-
+  int randomico = random(0, 2);
+  if(randomico==0){
+    adicaoX=-1;
+  }
+  if(randomico==1){
+    adicaoX=1;
+  }
 }
 void defineMatriz() {
   int i = 0;
@@ -89,7 +90,7 @@ void defineMatriz() {
 }
 
 void ReiniciaJogo() {
-  delayInicial = 300;
+  delayJogo = 300;
 
   pontos = 0;
   for (int i = 0; i < 8; i++) {
@@ -98,7 +99,7 @@ void ReiniciaJogo() {
     }
   }
   FastLED.show();
-  delay(2000);
+  delay(1000);
   for (int i = 0; i < 8; i++) {
     for (int j = 0; j < 8; j++) {
       leds[matriz[i][j]] = CRGB::Black;
@@ -132,23 +133,23 @@ void colisaoChao() {
   adicaoY = adicaoY * -1;
 }
 void diminuiDelay() {
-  if (delayInicial > 200) {
-    delayInicial = delayInicial - 10;
+  if (delayJogo > 200) {
+    delayJogo = delayJogo - 10;
   }
 }
 void colisaoRaquete() {
-  if (posicaoX == 1 && (posicaoY == posicaoRaquete || posicaoY == posicaoRaquete - 1)) {
+  if (bolinhaX == 1 && (bolinhaY == posicaoRaquete || bolinhaY == posicaoRaquete - 1)) {
     //Serial.println("COLISAO");
     adicaoX = 1;
     diminuiDelay();
 
   }
-  else if (posicaoX == 1 && adicaoY == -1 && posicaoY == posicaoRaquete + 1) {
+  else if (bolinhaX == 1 && adicaoY == -1 && bolinhaY == posicaoRaquete + 1) {
     //Serial.println("COLISAO");
     adicaoX = 1;
     diminuiDelay();
   }
-  else if (posicaoX == 1 && adicaoY == 1 && posicaoY == posicaoRaquete - 2) {
+  else if (bolinhaX == 1 && adicaoY == 1 && bolinhaY == posicaoRaquete - 2) {
     //Serial.println("COLISAO");
     adicaoX = 1;
     diminuiDelay();
@@ -177,35 +178,35 @@ void luzesPontuacao() {
 
 }
 void reiniciaBolinha() {
-  posicaoX = 3;
-  posicaoY = 3;
+  bolinhaX = 3;
+  bolinhaY = 3;
   adicaoY = 0;
   adicaoX = 1;
 }
 void bolinha() {
 
 
-  posicaoX = posicaoX + adicaoX;
+  bolinhaX = bolinhaX + adicaoX;
 
-  posicaoY = posicaoY + adicaoY;
+  bolinhaY = bolinhaY + adicaoY;
 
   //Serial.println(33232);
-  //Serial.println(posicaoY);
+  //Serial.println(bolinhaY);
   //Serial.println(adicaoY);
   // Serial.println(adicaoX);
 
-  leds[matriz[posicaoX][posicaoY]] = CRGB::Blue;
+  leds[matriz[bolinhaX][bolinhaY]] = CRGB::Blue;
 
 
   FastLED.show();
-  leds[matriz[posicaoX][posicaoY]] = CRGB::Black;
+  leds[matriz[bolinhaX][bolinhaY]] = CRGB::Black;
 
   colisaoRaquete();
 
 
 
 
-  if (posicaoX == 0) {
+  if (bolinhaX == 0) {
     luzesPontuacao();
 
     reiniciaBolinha();
@@ -235,13 +236,13 @@ void bolinha() {
 
 
 
-  if (posicaoX == 7) {
+  if (bolinhaX == 7) {
     colisaoParede();
 
   }
 
 
-  else if (posicaoY == 7 || posicaoY == 0) {
+  else if (bolinhaY == 7 || bolinhaY == 0) {
     colisaoChao();
   }
 
@@ -281,7 +282,7 @@ void computaRaqueteSoma() {
 
 void loop() {
 
-  delay(delayInicial);
+  delay(delayJogo);
 
   //ComputaRaquetePosicao();
   computaRaqueteSoma();
