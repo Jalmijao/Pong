@@ -199,10 +199,32 @@ void luzesPontuacao() {
 
 }
 void reiniciaBolinha() {
-  bolinhaX = 3;
+  
+  
+  FastLED.show();
+   int randomico = random(0, 2);
+  if(randomico==0){
+    leds[matriz[5][3]] = CRGB::Blue;
+    bolinhaX = 5;
   bolinhaY = 3;
+    adicaoX=-1;
+    delay(400);
+    leds[matriz[5][3]] = CRGB::Black;
+  }
+  if(randomico==1){
+    leds[matriz[2][3]] = CRGB::Blue;
+    bolinhaX = 2;
+  bolinhaY = 3;
+    adicaoX=1;
+    delay(400);
+    leds[matriz[2][3]] = CRGB::Black;
+  }
+  
+  
   adicaoY = 0;
-  adicaoX = 1;
+  
+    
+      FastLED.show();
 }
 void bolinha() {
 
@@ -233,7 +255,7 @@ void bolinha() {
   if (bolinhaX == 0) {
     luzesPontuacao();
 
-    reiniciaBolinha();
+    
     pontosJogador2 = pontosJogador2 + 1;
 
 
@@ -251,13 +273,14 @@ void bolinha() {
       ReiniciaJogo();
 
     }
+    reiniciaBolinha();
 
   }
 
    if (bolinhaX == 7 && doisJogadores) {
     luzesPontuacao();
 
-    reiniciaBolinha();
+    
     pontosJogador1 = pontosJogador1 + 1;
 
 
@@ -275,7 +298,7 @@ void bolinha() {
       ReiniciaJogo();
 
     }
-
+    reiniciaBolinha();
   }
 
   if (bolinhaX == 7) {
