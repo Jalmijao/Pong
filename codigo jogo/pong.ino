@@ -350,7 +350,7 @@ void computaRaqueteSoma2() {
   //Serial.println(distancia);
 
   if (distancia < 20 ) {
-    if (distancia > 10 && posicaoRaquete1 < 7) {
+    if (distancia > 10 && posicaoRaquete2 < 7) {
 
       leds[matriz[7][posicaoRaquete2]] = CRGB::Black;
       leds[matriz[7][posicaoRaquete2 - 1]] = CRGB::Black;
