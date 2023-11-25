@@ -15,7 +15,7 @@ int adicaoY = 0;
 int adicaoX = 1;
 int posicaoRaquete1 = 3;
 int posicaoRaquete2 = 3;
-int delayJogo = 250;
+int delayJogo = 350;
 int pontosJogador1 = 0;
 int pontosJogador2 = 0;
 bool doisJogadores=true;
@@ -140,39 +140,62 @@ void diminuiDelay() {
     delayJogo = delayJogo - 10;
   }
 }
+void RandomY(){
+  int randomico = random(0, 3);
+
+    if (adicaoY == 0) {
+      adicaoY = 1;
+    }
+    if (randomico == 1) {
+      adicaoY = -1;
+  
+    }
+    else if (randomico == 2) {
+      adicaoY = 0;
+  
+    }
+}
 void colisaoRaquete1() {
+
   if (bolinhaX == 1 && (bolinhaY == posicaoRaquete1 || bolinhaY == posicaoRaquete1 - 1)) {
     //Serial.println("COLISAO");
     adicaoX = 1;
+    RandomY();
     diminuiDelay();
 
   }
   else if (bolinhaX == 1 && adicaoY == -1 && bolinhaY == posicaoRaquete1 + 1) {
     //Serial.println("COLISAO");
     adicaoX = 1;
+    RandomY();
     diminuiDelay();
   }
   else if (bolinhaX == 1 && adicaoY == 1 && bolinhaY == posicaoRaquete1 - 2) {
     //Serial.println("COLISAO");
     adicaoX = 1;
+    RandomY();
     diminuiDelay();
   }
 }
 void colisaoRaquete2() {
+ 
   if (bolinhaX == 6 && (bolinhaY == posicaoRaquete2 || bolinhaY == posicaoRaquete2 - 1)) {
     //Serial.println("COLISAO");
     adicaoX = -1;
+     RandomY();
     diminuiDelay();
 
   }
   else if (bolinhaX == 6 && adicaoY == -1 && bolinhaY == posicaoRaquete2 + 1) {
     //Serial.println("COLISAO");
     adicaoX = -1;
+    RandomY();
     diminuiDelay();
   }
   else if (bolinhaX == 6 && adicaoY == 1 && bolinhaY == posicaoRaquete2 - 2) {
     //Serial.println("COLISAO");
     adicaoX = -1;
+    RandomY();
     diminuiDelay();
   }
 }
