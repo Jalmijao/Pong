@@ -2,10 +2,11 @@
 #include <FastLED.h>
 
 #define NUM_LEDS 64
-
+#include <AsyncTimer.h>
 #define DATA_PIN 8
 #define CLOCK_PIN 13
 
+AsyncTimer t;
 UltraSonicDistanceSensor distanceSensor(10, 9);  // Initialize sensor that uses digital pins 13 and 12.
 UltraSonicDistanceSensor distanceSensor2(12, 11);  // Initialize sensor that uses digital pins 13 and 12.
 int matriz[8][8];
@@ -398,16 +399,26 @@ void computaRaqueteSoma2() {
   }
 }
 void loop() {
+  t.setInterval([]() { 
+    leds[matriz[5][3]] = CRGB::Blue;
+   FastLED.show();
+  },
+                1000);
 
-  delay(delayJogo);
+                  t.setInterval([]() { 
+    leds[matriz[5][3]] = CRGB::Black;
+   FastLED.show();
+  },
+                10000);
+  //delay(delayJogo);
 
   //ComputaRaquetePosicao();
-  computaRaqueteSoma1();
-  if(doisJogadores){
-    computaRaqueteSoma2();
-  }
+  //computaRaqueteSoma1();
+  //if(doisJogadores){
+  //  computaRaqueteSoma2();
+  //}
   
-  bolinha();
+  //bolinha();
 
 
 }
