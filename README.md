@@ -22,6 +22,18 @@ Jogo pong para 1 ou dois jogadores, com uma tela inicial para escolher a dificul
 Jogo funcionando para único player, salvando a quantidade de pontos sofrida pelo jogador e apresentando essa informação na tela a cada ponto.
 Ao levar 8 pontos o jogo é resetado.
 
+17/10/2023
+Melhora do código e otimização dos controles da raquete
+
+24/11/2023
+Criação da possibilidade de jogar em dois jogadores e criação de sistema de pontos que é mostrado na tela para cada jogador. Caso um jogador chegue a 8 pontos o jogo reinicia
+
+01/12/2023
+otimização do controle da raquete através de um novo método para acender leds sem usar delay, fonte utilizada:
+https://docs.arduino.cc/built-in-examples/digital/BlinkWithoutDelay
+
+Dessa nova forma a raquete e a bolinha nao precisam se mover na mesma velocidade, podendo alterar a velocidade da bolinha mantendo a velocidade da raquete, vice e versa
+
 
 
 
