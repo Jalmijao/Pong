@@ -6,6 +6,12 @@
 #define DATA_PIN 8
 #define CLOCK_PIN 13
 
+unsigned long previousMillisBolinha = 0;  // will store last time LED was updated
+
+unsigned long previousMillisRaquete = 0;  // will store last time LED was updated
+// constants won't change:
+long velocidadeBolinha = 600;  // interval at which to blink (milliseconds)
+const long velocidadeRaquete = 200;
 AsyncTimer t;
 UltraSonicDistanceSensor distanceSensor(10, 9);  // Initialize sensor that uses digital pins 13 and 12.
 UltraSonicDistanceSensor distanceSensor2(12, 11);  // Initialize sensor that uses digital pins 13 and 12.
@@ -137,8 +143,8 @@ void colisaoChao() {
   adicaoY = adicaoY * -1;
 }
 void diminuiDelay() {
-  if (delayJogo > 200) {
-    delayJogo = delayJogo - 10;
+  if (velocidadeBolinha > 200) {
+    velocidadeBolinha = velocidadeBolinha - 10;
   }
 }
 void RandomY(){
@@ -257,28 +263,21 @@ void bolinha() {
 
   bolinhaY = bolinhaY + adicaoY;
 
-  //Serial.println(33232);
   //Serial.println(bolinhaY);
   //Serial.println(adicaoY);
   // Serial.println(adicaoX);
 
-  leds[matriz[bolinhaX][bolinhaY]] = CRGB::Blue;
-
-
-  FastLED.show();
-  leds[matriz[bolinhaX][bolinhaY]] = CRGB::Black;
+ 
 
   colisaoRaquete1();
   if(doisJogadores){
      colisaoRaquete2();
   }
 
-
-
-
   if (bolinhaX == 0) {
+    leds[matriz[bolinhaX][bolinhaY]] = CRGB::DarkRed;
     luzesPontuacao();
-
+    leds[matriz[bolinhaX][bolinhaY]] = CRGB::Black;
     
     pontosJogador2 = pontosJogador2 + 1;
 
@@ -302,8 +301,9 @@ void bolinha() {
   }
 
    if (bolinhaX == 7 && doisJogadores) {
+    leds[matriz[bolinhaX][bolinhaY]] = CRGB::DarkRed;
     luzesPontuacao();
-
+    leds[matriz[bolinhaX][bolinhaY]] = CRGB::Black;
     
     pontosJogador1 = pontosJogador1 + 1;
 
@@ -340,8 +340,8 @@ void bolinha() {
 
 void computaRaqueteSoma1() {
   float distancia = distanceSensor.measureDistanceCm();
-  //Serial.println(posicaoRaquete1);
-  //Serial.println(distancia);
+  Serial.println(posicaoRaquete1);
+  Serial.println(distancia);
 
   if (distancia < 20 ) {
     if (distancia > 10 && posicaoRaquete1 < 7) {
@@ -353,6 +353,8 @@ void computaRaqueteSoma1() {
 
       leds[matriz[0][posicaoRaquete1]] = CRGB::Blue;
       leds[matriz[0][posicaoRaquete1 - 1]] = CRGB::Blue;
+
+      
     }
     else if (distancia < 7 && posicaoRaquete1 > 1) {
 
@@ -363,9 +365,10 @@ void computaRaqueteSoma1() {
 
       leds[matriz[0][posicaoRaquete1]] = CRGB::Blue;
       leds[matriz[0][posicaoRaquete1 - 1]] = CRGB::Blue;
+      
 
     }
-
+  
   }
 }
 void computaRaqueteSoma2() {
@@ -399,26 +402,36 @@ void computaRaqueteSoma2() {
   }
 }
 void loop() {
-  t.setInterval([]() { 
-    leds[matriz[5][3]] = CRGB::Blue;
-   FastLED.show();
-  },
-                1000);
+  unsigned long currentMillis = millis();
+  FastLED.show();
+ 
+  if (currentMillis - previousMillisBolinha >= velocidadeBolinha) {
+    // save the last time you blinked the LED
+    previousMillisBolinha = currentMillis;
 
-                  t.setInterval([]() { 
-    leds[matriz[5][3]] = CRGB::Black;
-   FastLED.show();
-  },
-                10000);
+  
+    leds[matriz[bolinhaX][bolinhaY]] = CRGB::Black;
+    bolinha();
+    leds[matriz[bolinhaX][bolinhaY]] = CRGB::DarkRed;
+
+  }
+ if (currentMillis - previousMillisRaquete>= velocidadeRaquete) {
+    // save the last time you blinked the LED
+    previousMillisRaquete = currentMillis;
+
+    computaRaqueteSoma1();
+    if(doisJogadores){
+      computaRaqueteSoma2();
+    }
+  }
+  
+
   //delay(delayJogo);
 
-  //ComputaRaquetePosicao();
-  //computaRaqueteSoma1();
-  //if(doisJogadores){
-  //  computaRaqueteSoma2();
-  //}
   
-  //bolinha();
+ 
+  
+  
 
 
 }
