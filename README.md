@@ -6,7 +6,7 @@ Recriação do jogo Pong, utilizando uma placa de led 8x8 como tela e sensores u
 
 Materiais Utilizados:
 Arduino UNO
-Sensor de Distância Ultrassônico HC-SR04
+(2) Sensor de Distância Ultrassônico HC-SR04
 Matriz Flexivél Endereçável Digital 64led Rgb 8x8 5v Ws2812b
 
 Ideia projeto final:
@@ -33,6 +33,11 @@ otimização do controle da raquete através de um novo método para acender led
 https://docs.arduino.cc/built-in-examples/digital/BlinkWithoutDelay
 
 Dessa nova forma a raquete e a bolinha nao precisam se mover na mesma velocidade, podendo alterar a velocidade da bolinha mantendo a velocidade da raquete, vice e versa
+
+
+15/12/2023
+Alterando para novo arduino UNO
+Poder alterar o jogo através de um botão
 
 
 
