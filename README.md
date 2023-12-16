@@ -38,6 +38,7 @@ Dessa nova forma a raquete e a bolinha nao precisam se mover na mesma velocidade
 15/12/2023
 Alterando para novo arduino UNO
 Poder alterar o jogo através de um botão
+Video funcionamento dois jogadores:
 
 
 
