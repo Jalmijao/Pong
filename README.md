@@ -40,6 +40,7 @@ Alterando para novo arduino UNO
 Poder alterar o jogo através de um botão
 Video funcionamento dois jogadores:
 
+Criação do modo contra maquina
 
 
 
