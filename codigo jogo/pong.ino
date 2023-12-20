@@ -6,12 +6,12 @@
 #define DATA_PIN 8
 #define CLOCK_PIN 13
 
-unsigned long previousMillisBolinha = 0;  // will store last time LED was updated
+unsigned long previousMillisBolinha = 0;  
 
-unsigned long previousMillisRaquete = 0;  // will store last time LED was updated
-// constants won't change:
-long velocidadeBolinha = 600;  // interval at which to blink (milliseconds)
-const long velocidadeRaquete = 200;
+unsigned long previousMillisRaquete = 0;  
+
+long delayBolinha = 550;  
+const long delayRaquete = 200;
 int pushbutton = 2; // declara o push button na porta 2
 UltraSonicDistanceSensor distanceSensor(10, 9);  // Initialize sensor that uses digital pins 13 and 12.
 UltraSonicDistanceSensor distanceSensor2(12, 11);  // Initialize sensor that uses digital pins 13 and 12.
@@ -26,7 +26,7 @@ int delayJogo = 350;
 int pontosJogador1 = 0;
 int pontosJogador2 = 0;
 bool doisJogadores=true;
-bool isContraMaquina=true;
+bool isContraMaquina=false;
 bool subindo=true;
 bool estadoled = 0; // variavel de controle
 // Define the array of leds
@@ -102,8 +102,7 @@ void defineMatriz() {
 }
 
 void ReiniciaJogo() {
-  delayJogo = 300;
-
+  delayBolinha = 550;
   pontosJogador1 = 0;
   pontosJogador2 = 0;
   for (int i = 0; i < 8; i++) {
@@ -146,8 +145,8 @@ void colisaoChao() {
   adicaoY = adicaoY * -1;
 }
 void diminuiDelay() {
-  if (velocidadeBolinha > 200) {
-    velocidadeBolinha = velocidadeBolinha - 10;
+  if (delayBolinha > 200) {
+    delayBolinha = delayBolinha - 10;
   }
 }
 void RandomY(){
@@ -343,9 +342,9 @@ void bolinha() {
 
 void computaRaqueteSoma1() {
   float distancia = distanceSensor.measureDistanceCm();
-  Serial.println("aaaaaaa");
+  
   // Serial.println(posicaoRaquete1);
-  Serial.println(distancia);
+  //Serial.println(distancia);
 
   if (distancia < 20 ) {
     if (distancia > 10 && posicaoRaquete1 < 7) {
@@ -409,33 +408,48 @@ float distancia = distanceSensor2.measureDistanceCm();
 
   // Serial.println(posicaoRaquete1);
   Serial.println(distancia);
+     Serial.println("aaa");
 
   if (distancia < 20 ) {
-    if (distancia > 10 && posicaoRaquete2 < 7) {
+      Serial.println("bbb");
 
-      leds[matriz[7][posicaoRaquete2]] = CRGB::Black;
-      leds[matriz[7][posicaoRaquete2 - 1]] = CRGB::Black;
+      if (distancia > 10 && posicaoRaquete2 < 7) {
 
-      posicaoRaquete2 = posicaoRaquete2 + 1;
+        leds[matriz[7][posicaoRaquete2]] = CRGB::Black;
+        leds[matriz[7][posicaoRaquete2 - 1]] = CRGB::Black;
 
-      leds[matriz[7][posicaoRaquete2]] = CRGB::Blue;
-      leds[matriz[7][posicaoRaquete2 - 1]] = CRGB::Blue;
+        posicaoRaquete2 = posicaoRaquete2 + 1;
+
+        leds[matriz[7][posicaoRaquete2]] = CRGB::Blue;
+        leds[matriz[7][posicaoRaquete2 - 1]] = CRGB::Blue;
+      }
+      else if (distancia < 7 && posicaoRaquete2 > 1) {
+
+        leds[matriz[7][posicaoRaquete2]] = CRGB::Black;
+        leds[matriz[7][posicaoRaquete2 - 1]] = CRGB::Black;
+
+        posicaoRaquete2 = posicaoRaquete2 - 1;
+
+        leds[matriz[7][posicaoRaquete2]] = CRGB::Blue;
+        leds[matriz[7][posicaoRaquete2 - 1]] = CRGB::Blue;
+
+      }
+
     }
-    else if (distancia < 7 && posicaoRaquete2 > 1) {
-
-      leds[matriz[7][posicaoRaquete2]] = CRGB::Black;
-      leds[matriz[7][posicaoRaquete2 - 1]] = CRGB::Black;
-
-      posicaoRaquete2 = posicaoRaquete2 - 1;
-
-      leds[matriz[7][posicaoRaquete2]] = CRGB::Blue;
-      leds[matriz[7][posicaoRaquete2 - 1]] = CRGB::Blue;
-
-    }
-
-  }
   }
   
+}
+void ProximoModo(){
+  if(!doisJogadores){
+    doisJogadores=true;
+  }
+  else if(doisJogadores && !isContraMaquina){
+    isContraMaquina=true;
+  }
+  else if(isContraMaquina){
+    isContraMaquina=false;
+    doisJogadores=false;
+  }
 }
 void loop() {
   if (digitalRead(pushbutton) == LOW) // Se o botão for pressionado
@@ -444,27 +458,17 @@ void loop() {
      estadoled = !estadoled; // troca o estado do LED
      Serial.println("aaa");
     ReiniciaJogo();
+    ProximoModo();
     while (digitalRead(pushbutton) == LOW);
     delay(100);
   }
-delay(300);
+
   unsigned long currentMillis = millis();
   
 
   FastLED.show();
  
-  if (currentMillis - previousMillisBolinha >= velocidadeBolinha) {
-    // save the last time you blinked the LED
-    previousMillisBolinha = currentMillis;
-
-  
-    leds[matriz[bolinhaX][bolinhaY]] = CRGB::Black;
-    bolinha();
-    leds[matriz[bolinhaX][bolinhaY]] = CRGB::DarkRed;
-
-  }
- if (currentMillis - previousMillisRaquete>= velocidadeRaquete) {
-    // save the last time you blinked the LED
+  if (currentMillis - previousMillisRaquete>= delayRaquete) {
     previousMillisRaquete = currentMillis;
 
     computaRaqueteSoma1();
@@ -473,14 +477,15 @@ delay(300);
     }
   }
   
-//      leds[matriz[bolinhaX][bolinhaY]] = CRGB::Black;
-//     bolinha();
-//     leds[matriz[bolinhaX][bolinhaY]] = CRGB::DarkRed;
-//  computaRaqueteSoma1();
-//     if(doisJogadores){
-//       computaRaqueteSoma2();
-//     }
-  //delay(delayJogo);
+  if (currentMillis - previousMillisBolinha >= delayBolinha) {
+    previousMillisBolinha = currentMillis;
+
+  
+    leds[matriz[bolinhaX][bolinhaY]] = CRGB::Black;
+    bolinha();
+    leds[matriz[bolinhaX][bolinhaY]] = CRGB::DarkRed;
+
+  }
 
   
  
