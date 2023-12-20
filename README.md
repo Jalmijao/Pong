@@ -37,10 +37,13 @@ Dessa nova forma a raquete e a bolinha nao precisam se mover na mesma velocidade
 
 15/12/2023
 Alterando para novo arduino UNO
-Poder alterar o jogo através de um botão
+Criação do modo contra maquina
+Poder alterar o modo de jogo através de um botão (único jogador contra a parede, jogador contra maquina e jogador contra jogador)
+
+
 Video funcionamento dois jogadores:
 
-Criação do modo contra maquina
+
 
 
 
