@@ -30,9 +30,6 @@ Vídeo funcionamento troca de modos de jogo:
 https://drive.google.com/file/d/1TKpW4ybSC6xDZAd7XIkeeMF5UkIip1qx/view?usp=sharing
 
 12/11/2023
-![video funcionamento](https://github.com/Jalmijao/Pong/blob/main/conteudo%2012-11-2023/Funcionamento%20jogo%201%20player.mp4)
-
-
 ![setup inicial](https://github.com/Jalmijao/Pong/blob/main/conteudo%2012-11-2023/Setup%20inicial.png)
 
 Jogo funcionando para único player, salvando a quantidade de pontos sofrida pelo jogador e apresentando essa informação na tela a cada ponto.
@@ -56,8 +53,6 @@ Alterando para novo arduino UNO
 Criação do modo contra maquina
 Poder alterar o modo de jogo através de um botão (único jogador contra a parede, jogador contra maquina e jogador contra jogador)
 
-
-Video funcionamento dois jogadores:
 
 
 
