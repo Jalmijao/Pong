@@ -9,6 +9,10 @@ Arduino UNO
 (2) Sensor de Distância Ultrassônico HC-SR04
 Matriz Flexivél Endereçável Digital 64led Rgb 8x8 5v Ws2812b
 
+Bibliotecas utilizadas:
+HCSR04.h
+FastLED.h
+
 Ideia projeto final:
 Classico Jogo pong com modos de jogo de 1 jogador, contra a maquina ou dois jogadores, podendo escolher o modo de jogo.
 
