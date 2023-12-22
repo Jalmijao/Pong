@@ -2,7 +2,7 @@
 
 Introdução:
 
-Recriação do jogo Pong, utilizando uma placa de led 8x8 como tela e sensores ultrassonicos de distancia como controle.
+Recriação do jogo Pong, utilizando uma placa de led 8x8 como tela e sensores ultrassonicos de distancia como controle das raquetes.
 
 Materiais Utilizados:
 Arduino UNO
@@ -10,13 +10,18 @@ Arduino UNO
 Matriz Flexivél Endereçável Digital 64led Rgb 8x8 5v Ws2812b
 
 Ideia projeto final:
-Jogo pong para 1 ou dois jogadores, com uma tela inicial para escolher a dificuldade e quantidade de jogadores.
+Classico Jogo pong com modos de jogo de 1 jogador, contra a maquina ou dois jogadores, podendo escolher o modo de jogo.
 
-Estrutura de montagem do arduino:
+
+
+Estrutura de montagem do arduino (https://wokwi.com/projects/384594518400488449):
 ![image](https://github.com/Jalmijao/Pong/assets/80426140/72c886d5-7478-46bd-9258-5ef5b6f6c695)
 
-https://wokwi.com/projects/384594518400488449
+Vídeo funcionamento um jogador:
 
+Vídeo funcionamento contra a maquina:
+
+Vídeo funcionamento em dois jogadores:
 
 12/11/2023
 ![video funcionamento](https://github.com/Jalmijao/Pong/blob/main/conteudo%2012-11-2023/Funcionamento%20jogo%201%20player.mp4)
