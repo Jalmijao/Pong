@@ -18,10 +18,16 @@ Estrutura de montagem do arduino (https://wokwi.com/projects/384594518400488449)
 ![image](https://github.com/Jalmijao/Pong/assets/80426140/72c886d5-7478-46bd-9258-5ef5b6f6c695)
 
 Vídeo funcionamento um jogador:
+https://drive.google.com/file/d/1WMReQyKVx7VTxaWuL7fP_MzFx_e4MREj/view?usp=sharing
 
 Vídeo funcionamento contra a maquina:
+https://drive.google.com/file/d/1caEEGXffej7BTFmQAfNX9rBDiF2xztXz/view?usp=sharing
 
 Vídeo funcionamento em dois jogadores:
+https://drive.google.com/file/d/1OEXSuy2zyRCepjwLRA4VMFbTpAX5XULy/view?usp=sharing
+
+Vídeo funcionamento troca de modos de jogo:
+https://drive.google.com/file/d/1TKpW4ybSC6xDZAd7XIkeeMF5UkIip1qx/view?usp=sharing
 
 12/11/2023
 ![video funcionamento](https://github.com/Jalmijao/Pong/blob/main/conteudo%2012-11-2023/Funcionamento%20jogo%201%20player.mp4)
