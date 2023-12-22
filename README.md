@@ -12,6 +12,11 @@ Matriz Flexivél Endereçável Digital 64led Rgb 8x8 5v Ws2812b
 Ideia projeto final:
 Jogo pong para 1 ou dois jogadores, com uma tela inicial para escolher a dificuldade e quantidade de jogadores.
 
+Estrutura de montagem do arduino:
+![image](https://github.com/Jalmijao/Pong/assets/80426140/72c886d5-7478-46bd-9258-5ef5b6f6c695)
+
+https://wokwi.com/projects/384594518400488449
+
 
 12/11/2023
 ![video funcionamento](https://github.com/Jalmijao/Pong/blob/main/conteudo%2012-11-2023/Funcionamento%20jogo%201%20player.mp4)
